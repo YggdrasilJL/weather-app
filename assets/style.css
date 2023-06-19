@@ -1,3 +1,7 @@
+body {
+    background-color: rgb(233, 241, 194);
+}
+
 header {
     background-color: rgb(10, 10, 75);
 
@@ -18,4 +22,9 @@ header h1 {
 .input-group {
     width: auto;
     height: 5vh;
+}
+
+.card {
+    width: 40vh;
+    background-color: rgb(121, 153, 88);
 }

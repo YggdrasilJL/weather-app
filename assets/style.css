@@ -27,3 +27,19 @@ header h1 {
 .card {
     background-color: rgb(116, 150, 116);
 }
+
+.style-history {
+    display: flex;
+    flex-direction: column;
+}
+
+.ul-style-history {
+    display: flex;
+    flex-direction: column-reverse;
+    width: 200px;
+}
+
+.ul-style-history button {
+    
+    margin-top: 10px;
+}

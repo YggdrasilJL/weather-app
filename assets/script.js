@@ -19,8 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (event.key === 'Enter') {
       const cityName = event.target.value
       getCityCoordinates(cityName)
-      addSearchHistory(cityName)
-
     }
   })
 
@@ -37,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(data => {
       return data.json()
     })
-    .then(data => {
+    .then(data => {  
       const lat = data[0].lat
       const long = data[0].lon
       getWeather(lat, long)
@@ -51,9 +49,14 @@ document.addEventListener('DOMContentLoaded', () => {
         return data.json()
       })
       .then(data => {
-        const lat = data[0].lat
-        const long = data[0].lon
-        getWeather(lat, long)
+        try {
+          const lat = data[0].lat
+          const long = data[0].lon
+          getWeather(lat, long)
+          addSearchHistory(cityName)
+        } catch (error) {
+         alert('Please enter a valid city!')
+        }
       })
   }
 
@@ -66,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return data.json()
       })
       .then(data => {
+        console.log(data)
         const fiveForecastList = data.list
 
         const currentCard = document.querySelector('.col-12.col-md-6 .card')
@@ -106,19 +110,28 @@ document.addEventListener('DOMContentLoaded', () => {
       })
   }
 
+
   function addSearchHistory(city) {
     if (!searchHistoryList.includes(city)) {
       searchHistoryList.push(city);
       localStorage.setItem('searchHistoryList', JSON.stringify(searchHistoryList))
       displaySearchHistory()
     }
-    
   }
   
 
   function displaySearchHistory() {
     searchHistory.textContent = ''
      const clearSearch = document.getElementById('clearBtn')
+     if (searchHistoryList.length === 13) {
+      clearSearch.classList.add('bg-warning')
+      clearSearch.classList.add('text-primary-emphasis')
+    } else if (searchHistoryList.length >= 14) {
+      clearSearch.classList.remove('bg-warning')
+      clearSearch.classList.add('bg-danger')
+      clearSearch.classList.remove('text-primary-emphasis')
+      clearSearch.classList.add('text-green')
+    }
     searchHistoryList.forEach(city => {
      const list = document.createElement('button')
       list.textContent = city.charAt(0).toUpperCase() + city.slice(1)
@@ -126,7 +139,12 @@ document.addEventListener('DOMContentLoaded', () => {
       searchHistory.appendChild(list)
     })
     clearSearch.addEventListener('click', () => {
-      
+      searchHistory.innerHTML = ''
+      localStorage.clear()
+      clearSearch.classList.remove('bg-warning')
+      clearSearch.classList.remove('bg-danger')
+      clearSearch.classList.remove('text-primary-emphasis')
+      clearSearch.classList.remove('text-green')
     })
   }
 })

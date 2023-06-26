@@ -37,4 +37,11 @@ Simply go to [this](https://YggdrasilJL.github.io/weather-app/) site.
 - The search history is stored in the browser's local storage, allowing easy access to previously searched cities.
 
 # Credits
+---
 ## This project was made by Jacob Lowther.
+   
+  ---
+ #
+https://openweathermap.org/api
+
+https://getbootstrap.com/docs/5.3/getting-started/introduction/

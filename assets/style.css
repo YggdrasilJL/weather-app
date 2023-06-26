@@ -26,6 +26,7 @@ header h1 {
 
 .card {
     background-color: rgb(116, 150, 116);
+    max-width: 40vh;
 }
 
 .style-history {
